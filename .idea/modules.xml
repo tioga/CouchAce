@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/couchace.iml" filepath="$PROJECT_DIR$/couchace.iml" />
-      <module fileurl="file://$PROJECT_DIR$/couchace-root.iml" filepath="$PROJECT_DIR$/couchace-root.iml" />
+      <module fileurl="file://$PROJECT_DIR$/couch-ace.iml" filepath="$PROJECT_DIR$/couch-ace.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-couchace-all/tioga-couchace-all.iml" filepath="$PROJECT_DIR$/tioga-couchace-all/tioga-couchace-all.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-couchace-annotations/tioga-couchace-annotations.iml" filepath="$PROJECT_DIR$/tioga-couchace-annotations/tioga-couchace-annotations.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-couchace-core/tioga-couchace-core.iml" filepath="$PROJECT_DIR$/tioga-couchace-core/tioga-couchace-core.iml" />
