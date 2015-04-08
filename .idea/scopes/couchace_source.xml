@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="couchace-source" pattern="file:src//*" />
+</component>

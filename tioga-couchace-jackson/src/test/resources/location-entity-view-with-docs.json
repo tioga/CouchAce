@@ -1,0 +1,30 @@
+{"total_rows": 2, "offset": 0, "rows": [
+    {
+        "id": "1122",
+        "key": "Toronto",
+        "value": null,
+        "doc": {
+            "_id": "1122",
+            "_rev": "1-03ba856139647f1ed4694ceb1fe21751",
+            "entityType": "Location",
+            "entity": {
+                "direction": "NORTH",
+                "city": "Toronto"
+            }
+        }
+    },
+    {
+        "id": "3344",
+        "key": "Austin",
+        "value": null,
+        "doc": {
+            "_id": "3344",
+            "_rev": "1-be5026e8a8aec25fb4eb67f8047460b3",
+            "entityType": "Location",
+            "entity": {
+                "direction": "SOUTH",
+                "city": "Austin"
+            }
+        }
+    }
+]}

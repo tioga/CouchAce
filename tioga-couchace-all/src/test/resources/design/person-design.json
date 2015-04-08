@@ -1,0 +1,12 @@
+{
+    "_id": "_design/person",
+    "language": "javascript",
+    "views": {
+        "byName": {
+            "map": "function(doc) {\n\tif (doc.entity.lastName) {\n  \t\temit(doc.entity.lastName + \" \" + doc.entity.firstName, null);\n\t}\n}"
+        },
+        "byStatus": {
+            "map": "function(doc) {\n\tif (doc.entity.status) {\n  \t\temit(doc.entity.status, null);\n\t}\n}"
+        }
+    }
+}

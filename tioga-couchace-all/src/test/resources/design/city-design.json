@@ -1,0 +1,9 @@
+{
+    "_id": "_design/city",
+    "language": "javascript",
+    "views": {
+        "cityName": {
+            "map": "function(doc) {\n\tif (doc.city) {\n  \t\temit(doc.city, null);\n\t}\n}"
+        }
+    }
+}

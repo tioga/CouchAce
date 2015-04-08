@@ -1,0 +1,28 @@
+Build
+--------------
+
+CORE
+--------------
+TSK using a view where we want to parse the value of the view, not the document
+TSK include IdGenerators
+
+Attachment
+---------------
+TSK what to do with null values on a PUT
+TSK what happens when attachment not found, looks like ended up with not found error content
+
+Exception Handling
+---------------------
+TSK HttpClient translations
+TSK JsonStrategy translations
+
+HTTP
+-------------
+TSK simulate errors: no DB, no view,
+
+SSL
+-------------
+TSK review configuration
+TSK Ensure being unit tests
+TSK Minimize SslConfig and KeyStoreAccessor
+TSK SslSetup is optional given things that RK identified

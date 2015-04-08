@@ -1,0 +1,21 @@
+{
+    "_id": "_design/pet",
+    "language": "javascript",
+    "views": {
+        "byName": {
+            "map": "function(doc) {\n\tif (doc.entityType == 'Pet' && doc.entity.name) {\n  \t\temit(doc.entity.name, null);\n\t}\n}"
+        },
+        "byType": {
+            "map": "function(doc) {\n\tif (doc.entityType == 'Pet' && doc.entity.type) {\n  \t\temit(doc.entity.type, null);\n\t}\n}"
+        },
+        "byTypeAndId": {
+            "map": "function(doc) {\n\tif (doc.entityType == 'Pet' && doc.entity.type) {\n  \t\temit([doc.entity.type, doc.entity.id], null);\n\t}\n}"
+        },
+        "byId": {
+            "map": "function(doc) {\n\tif (doc.entityType == 'Pet' && doc.entity.id) {\n  \t\temit(doc.entity.id, null);\n\t}\n}"
+        },
+        "byCreatedAt": {
+            "map": "function(doc) {\n\tif (doc.entityType == 'Pet' && doc.entity.createdAt) {\n  \t\temit(doc.entity.createdAt, null);\n\t}\n}"
+        }
+    }
+}
