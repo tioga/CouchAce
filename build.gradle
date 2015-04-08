@@ -47,7 +47,7 @@ subprojects {
         jacksonVersion = '2.5.1'
         jerseyVersion = '2.16'
 
-        pomProjectDescription = "CouchAce"
+        pomProjectDescription = "Couch Ace"
         pomUrl = 'https://www.tiogasolutions.org'
         pomScmUrl = "https://github.com/tioga"
         pomScmConnection = "https://github.com/tioga/couch-ace.git"
