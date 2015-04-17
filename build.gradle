@@ -30,18 +30,12 @@ apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-
 subprojects {
 
     group = 'org.tiogasolutions.couchace'
-    version = '1.4.2'
+    version = '1.4.3'
 
     apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-reports.gradle")
     apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-versions.gradle")
 
     ext {
-        slf4jVersion = "1.7.10"
-        logbackVersion = "1.1.2"
-        testngVersion = "6.8.17"
-        jacksonVersion = '2.5.1'
-        jerseyVersion = '2.16'
-
         pomProjectDescription = "Couch Ace"
         pomUrl = 'https://www.tiogasolutions.org'
         pomScmUrl = "https://github.com/tioga"
@@ -68,8 +62,8 @@ subprojects {
 
     // Common dependencies
     dependencies {
-        compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion, transitive: true
-        testCompile group: 'org.testng', name: 'testng', version: testngVersion, transitive: true
+        compile group: 'org.slf4j', name: 'slf4j-api', version: "1.7.12", transitive: true
+        testCompile group: 'org.testng', name: 'testng', version: "6.8.21", transitive: true
     }
 
     // Source jar
