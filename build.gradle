@@ -13,27 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-buildscript {
-    repositories {
-        mavenCentral()
-        mavenLocal()
-        jcenter()
-    }
-    dependencies {
-        classpath 'org.hidetake:gradle-ssh-plugin:0.3.5'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.7'
-    }
+plugins {
+    id "com.github.ben-manes.versions" version "0.8"
+    id 'org.hidetake.ssh' version '1.1.2'
+    id 'com.kageiit.url-cache' version '1.0.0'
 }
 
-apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-java.gradle")
+apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-java.gradle"))
 
 subprojects {
 
     group = 'org.tiogasolutions.couchace'
+
+    // We define the version here for all modules because all
+    // modules are deployed and used together in 100% of the cases.
     version = '1.4.3'
 
-    apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-reports.gradle")
-    apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-versions.gradle")
+    apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-reports.gradle"))
+    apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-versions.gradle"))
+
+    targetCompatibility = "1.8"
+    sourceCompatibility = "1.8"
+
+    configurations.all ({
+        resolutionStrategy {
+            failOnVersionConflict()
+        }
+    })
 
     ext {
         pomProjectDescription = "Couch Ace"
@@ -42,107 +48,8 @@ subprojects {
         pomScmConnection = "https://github.com/tioga/CouchAce.git"
     }
 
-//    repositories {
-//        mavenCentral()
-//        mavenLocal()
-//    }
-
-//    sourceSets {
-//        main {
-//            java { srcDir 'src/main/java' }
-//        }
-//        test {
-//            java { srcDir 'src/test/java' }
-//        }
-//    }
-
-//    test {
-//        useTestNG()
-//    }
-
-    // Common dependencies
     dependencies {
-        compile group: 'org.slf4j', name: 'slf4j-api', version: "1.7.12", transitive: true
+        compile("org.slf4j:slf4j-api:1.7.12") {force = true}
         testCompile group: 'org.testng', name: 'testng', version: "6.8.21", transitive: true
     }
-
-    // Source jar
-//    task sourcesJar(type: Jar, dependsOn: classes) {
-//        classifier = 'sources'
-//        from sourceSets.main.allSource
-//    }
-
-    // Java doc
-//    task javadocJar(type: Jar, dependsOn: javadoc) {
-//        classifier = 'javadoc'
-//        from javadoc.destinationDir
-//    }
-
-    // Test jar
-//    task testJar(type: Jar, dependsOn: testClasses) {
-//        classifier = 'tests'
-//        from sourceSets.test.output
-//    }
-//    configurations {
-//        tests
-//    }
-
-    // Include artifacts configured above
-//    artifacts {
-//        archives sourcesJar
-//        archives javadocJar
-//        tests testJar
-//    }
-
-// HACK - uncomment if publishing
-/*
-    signing {
-        sign configurations.archives
-    }
-*/
-
-    // Maven upload
-
-/*
-    uploadArchives {
-        repositories {
-            mavenDeployer {
-// HACK - uncomment if publishing
-                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-//                repository(url: "file:c:/Users/harlan/.m2")
-//                repository(url: "file://tools/maven-repository/")
-                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                    authentication(userName: "someuser", password: "somepassword")
-                }
-                pom.groupId = project.group
-                pom.artifactId = project.name
-                pom.version = project.version
-                pom.packaging = 'jar'
-                pom.project {
-                    name = project.name
-                    description = "CouchAce"
-                    url = 'http://couchace.com'
-                    licenses {
-                        license {
-                            name = 'Apache License, Version 2.0'
-                            url = 'http://www.apache.org/licenses/LICENSE-2.0'
-                            distribution = 'repo'
-                        }
-                    }
-                    scm {
-                        url = 'https://bitbucket.org/harlan/couchace-root'
-                        connection = 'https://bitbucket.org/harlan/couchace-root.git'
-                    }
-                    developers {
-                        developer {
-                            id = 'harlan'
-                            name = 'Harlan'
-                            email = 'harlan.work@gmail.com'
-                        }
-                    }
-                }
-            }
-        }
-    }
-*/
 }

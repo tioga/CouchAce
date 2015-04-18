@@ -19,13 +19,13 @@ project(':tioga-couchace-all') {
     description = "CouchAce All"
 
     dependencies {
-        compile project(':tioga-couchace-annotations')
-        compile project(':tioga-couchace-core')
-        compile project(':tioga-couchace-jackson')
-        compile project(':tioga-couchace-jersey')
+        compile(project(':tioga-couchace-annotations'))
+        compile(project(':tioga-couchace-core'))
+        compile(project(':tioga-couchace-jackson'))
+        compile(project(':tioga-couchace-jersey'))
 
-        compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: "2.5.2", transitive: true
+        compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.5.0")
     }
 
-    apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle?" + System.currentTimeMillis())
+    apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
 }

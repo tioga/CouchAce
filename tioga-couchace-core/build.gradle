@@ -21,10 +21,8 @@ project(':tioga-couchace-core') {
         compile project(':tioga-couchace-annotations')
 
         testCompile group: 'ch.qos.logback', name: 'logback-core', version: "1.1.3", transitive: true
-        testCompile group: 'ch.qos.logback', name: 'logback-classic', version: "1.1.3", transitive: true, {
-            exclude module: 'slf4j-api'
-        }
+        testCompile group: 'ch.qos.logback', name: 'logback-classic', version: "1.1.3", transitive: true
     }
 
-    apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle?" + System.currentTimeMillis())
+    apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
 }
