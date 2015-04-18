@@ -23,8 +23,6 @@ project(':tioga-couchace-all') {
         compile(project(':tioga-couchace-core'))
         compile(project(':tioga-couchace-jackson'))
         compile(project(':tioga-couchace-jersey'))
-
-        compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.5.0")
     }
 
     apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))

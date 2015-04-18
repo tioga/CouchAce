@@ -37,7 +37,9 @@ subprojects {
 
     configurations.all ({
         resolutionStrategy {
-            failOnVersionConflict()
+            if (System.getProperty("no-fail-version-conflict") != "true") {
+                failOnVersionConflict()
+            }
         }
     })
 
@@ -50,6 +52,6 @@ subprojects {
 
     dependencies {
         compile("org.slf4j:slf4j-api:1.7.12") {force = true}
-        testCompile group: 'org.testng', name: 'testng', version: "6.8.21", transitive: true
+        testCompile("org.testng:testng:6.8.21")
     }
 }
