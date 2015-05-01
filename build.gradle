@@ -27,7 +27,7 @@ subprojects {
 
     // We define the version here for all modules because all
     // modules are deployed and used together in 100% of the cases.
-    version = '1.4.3'
+    version = '1.4.4'
 
     apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-reports.gradle"))
     apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-versions.gradle"))
@@ -51,7 +51,7 @@ subprojects {
     }
 
     dependencies {
-        compile("org.slf4j:slf4j-api:1.7.12") {force = true}
+        compile("org.slf4j:slf4j-api:1.7.7")
         testCompile("org.testng:testng:6.8.21")
     }
 }
