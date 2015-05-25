@@ -51,14 +51,39 @@ public class RequestExecutor {
     public HeadResponse execute(HeadRequest request) {
         HttpHeadRequest httpHeadRequest = httpRequestFactory.newHttpHeadRequest(request);
         CouchHttpResponse httpResponse = httpClient.head(httpHeadRequest);
-        return new HeadResponse(httpResponse);
+        HeadResponse response = new HeadResponse(httpResponse);
+
+        // Call onError, onSuccess and onResponse
+        if (response.isError() && request.getOnError() != null) {
+            request.getOnError().handle(response);
+        } else if (request.getOnSuccess() != null) {
+            request.getOnSuccess().handle(response);
+        }
+        if (request.getOnResponse() != null) {
+            request.getOnResponse().handle(response);
+        }
+
+        return response;
     }
 
     public GetDocumentResponse execute(GetDocumentRequest request) {
         HttpGetRequest httpGetRequest = httpRequestFactory.newHttpGetRequest(request);
         CouchHttpResponse couchHttpResponse = httpClient.get(httpGetRequest);
 
-        return getResponseBuilder.buildDocumentResponse(request, couchHttpResponse);
+        GetDocumentResponse response = getResponseBuilder.buildDocumentResponse(request, couchHttpResponse);
+
+        // Call onError, onSuccess and onResponse
+        if (response.isError() && request.getOnError() != null) {
+            request.getOnError().handle(response);
+        } else if (request.getOnSuccess() != null) {
+            request.getOnSuccess().handle(response);
+        }
+        if (request.getOnResponse() != null) {
+            request.getOnResponse().handle(response);
+        }
+
+        return response;
+
     }
 
     public GetContentResponse execute(GetDatabaseRequest request) {
@@ -70,11 +95,23 @@ public class RequestExecutor {
             errorContent = CouchErrorContent.parseJson(httpResponse.getStringContent());
         }
 
-        return new GetContentResponse(httpResponse.getUri(),
+        GetContentResponse response = new GetContentResponse(httpResponse.getUri(),
                 httpResponse.getHttpStatus(),
                 httpResponse.getContentType(),
                 httpResponse.getContent(),
                 errorContent);
+
+        // Call onError, onSuccess and onResponse
+        if (response.isError() && request.getOnError() != null) {
+            request.getOnError().handle(response);
+        } else if (request.getOnSuccess() != null) {
+            request.getOnSuccess().handle(response);
+        }
+        if (request.getOnResponse() != null) {
+            request.getOnResponse().handle(response);
+        }
+
+        return response;
     }
 
     public GetAttachmentResponse execute(GetAttachmentRequest request) {
@@ -222,21 +259,34 @@ public class RequestExecutor {
     }
 
     public WriteResponse execute(PostRequest request) {
-
+        WriteResponse response;
         if (request instanceof PostEntityRequest) {
-            return executePostEntity((PostEntityRequest) request);
+            response = executePostEntity((PostEntityRequest) request);
 
         } else if (request instanceof PostDocumentRequest) {
-            return executePostDocument((PostDocumentRequest)request);
+            response = executePostDocument((PostDocumentRequest)request);
 
         } else if (request instanceof PostDatabaseRequest) {
-            return executePostDatabase((PostDatabaseRequest)request);
+            response = executePostDatabase((PostDatabaseRequest)request);
 
         } else {
             String className = (request == null) ? "null" : request.getClass().getName();
             String msg = String.format("The request %s is not supported.", className);
             throw new UnsupportedOperationException(msg);
         }
+
+        // Call onError, onSuccess and onResponse
+        if (response.isError() && request.getOnError() != null) {
+            request.getOnError().handle(response);
+        } else if (request.getOnSuccess() != null) {
+            request.getOnSuccess().handle(response);
+        }
+        if (request.getOnResponse() != null) {
+            request.getOnResponse().handle(response);
+        }
+
+        return response;
+
     }
 
     protected WriteResponse executePostEntity(PostEntityRequest request) {

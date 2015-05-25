@@ -28,6 +28,7 @@ public class CouchViewQuery {
     private final int skip;
     private boolean descending = false;
     private boolean includeDocs = true;
+    private boolean group = false;
 
     public static CouchViewQueryBuilder builder(String designName, String viewName) {
         return new CouchViewQueryBuilder(designName, viewName);
@@ -41,7 +42,8 @@ public class CouchViewQuery {
                           CouchJsonKey endKey,
                           CouchJsonKey key,
                           boolean descending,
-                          boolean includeDocs) {
+                          boolean includeDocs,
+                          boolean group) {
         ArgUtil.assertNotNull(designName, "designName");
         ArgUtil.assertNotNull(viewName, "viewName");
         this.designName = designName;
@@ -53,6 +55,7 @@ public class CouchViewQuery {
         this.skip = skip;
         this.descending = descending;
         this.includeDocs = includeDocs;
+        this.group = group;
     }
 
     public String getDesignName() {
@@ -111,6 +114,11 @@ public class CouchViewQuery {
         return descending;
     }
 
+    public boolean isGroup() {
+        return group;
+    }
+
+    // TODO - why is this mutable
     public CouchViewQuery setDescending(boolean descending) {
         this.descending = descending;
         return this;
@@ -120,6 +128,7 @@ public class CouchViewQuery {
         return includeDocs;
     }
 
+    // TODO - why is this mutable
     public CouchViewQuery setIncludeDocs(boolean includeDocs) {
         this.includeDocs = includeDocs;
         return this;
@@ -146,6 +155,7 @@ public class CouchViewQuery {
         private int skip;
         private boolean descending = false;
         private boolean includeDocs = true;
+        private boolean group = false;
 
         public CouchViewQueryBuilder(String designName, String viewName) {
             this.designName = designName;
@@ -153,7 +163,7 @@ public class CouchViewQuery {
         }
 
         public CouchViewQuery build() {
-            return new CouchViewQuery(designName, viewName, limit, skip, startKey, endKey, key, descending, includeDocs);
+            return new CouchViewQuery(designName, viewName, limit, skip, startKey, endKey, key, descending, includeDocs, group);
         }
 
         public CouchViewQueryBuilder key(Object... key) {
@@ -188,6 +198,11 @@ public class CouchViewQuery {
 
         public CouchViewQueryBuilder includeDocs(boolean includeDocs) {
             this.includeDocs = includeDocs;
+            return this;
+        }
+
+        public CouchViewQueryBuilder group(boolean group) {
+            this.group = group;
             return this;
         }
 

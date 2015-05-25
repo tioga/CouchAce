@@ -110,6 +110,9 @@ public class HttpRequestFactory {
             if (viewQuery.isDescending()) {
                 queryBuilder.add("descending", String.valueOf(viewQuery.isDescending()));
             }
+            if (viewQuery.isGroup()) {
+                queryBuilder.add("group", String.valueOf(viewQuery.isGroup()));
+            }
 
         } else if (request.getPageQuery() != null) {
             // Page query

@@ -16,11 +16,21 @@
 
 package org.tiogasolutions.couchace.core.api.request;
 
+import org.tiogasolutions.couchace.core.api.response.CouchResponseHandler;
+import org.tiogasolutions.couchace.core.api.response.WriteResponse;
+
 /**
  * User: harlan
  * Date: 9/15/12
  * Time: 8:32 PM
  */
 public interface PostRequest {
+
+    CouchResponseHandler<WriteResponse> getOnResponse();
+
+    CouchResponseHandler<WriteResponse> getOnSuccess();
+
+    CouchResponseHandler<WriteResponse> getOnError();
+
 
 }
