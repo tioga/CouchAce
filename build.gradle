@@ -27,7 +27,7 @@ subprojects {
 
     // We define the version here for all modules because all
     // modules are deployed and used together in 100% of the cases.
-    version = '1.4.5'
+    version = '1.5.0'
 
     apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-reports.gradle"))
     apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-versions.gradle"))
