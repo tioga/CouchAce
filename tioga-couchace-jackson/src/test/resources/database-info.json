@@ -1,1 +1,1 @@
-{"db_name": "couchace-test", "doc_count": 20, "doc_del_count": 1, "update_seq": 29, "purge_seq": 0, "compact_running": false, "disk_size": 36968, "data_size": 7534, "instance_start_time": "1393733215845300", "disk_format_version": 6, "committed_update_seq": 29}
+{"db_name": "test-couchace", "doc_count": 20, "doc_del_count": 1, "update_seq": 29, "purge_seq": 0, "compact_running": false, "disk_size": 36968, "data_size": 7534, "instance_start_time": "1393733215845300", "disk_format_version": 6, "committed_update_seq": 29}

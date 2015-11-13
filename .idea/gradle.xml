@@ -16,6 +16,16 @@
             <option value="$PROJECT_DIR$/tioga-couchace-jersey" />
           </set>
         </option>
+        <option name="myModules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/tioga-couchace-all" />
+            <option value="$PROJECT_DIR$/tioga-couchace-annotations" />
+            <option value="$PROJECT_DIR$/tioga-couchace-core" />
+            <option value="$PROJECT_DIR$/tioga-couchace-jackson" />
+            <option value="$PROJECT_DIR$/tioga-couchace-jersey" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>

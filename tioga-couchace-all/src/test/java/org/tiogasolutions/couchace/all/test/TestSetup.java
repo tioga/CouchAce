@@ -44,7 +44,7 @@ public class TestSetup {
 
     private static TestSetup singleton = null;
 
-    public static final String databaseName = "couchace-test";
+    public static final String databaseName = "test-couchace";
     public static final String userName = "couchace";
     public static final String password = "unittest";
 

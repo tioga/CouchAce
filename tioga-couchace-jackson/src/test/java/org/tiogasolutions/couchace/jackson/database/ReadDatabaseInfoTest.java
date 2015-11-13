@@ -33,7 +33,7 @@ public class ReadDatabaseInfoTest {
     public void viewResultsWithDocsTest() throws URISyntaxException {
         String json = JacksonTestSetup.databaseInfoJson;
         CouchDatabaseInfo info = strategy.readDatabaseInfo(json);
-        assertEquals(info.getDbName(), "couchace-test");
+        assertEquals(info.getDbName(), "test-couchace");
         assertEquals(info.getDocCount(), new Integer(20));
         assertEquals(info.getDocDelCount(), new Integer(1));
         assertEquals(info.getUpdateSeq(), new Integer(29));

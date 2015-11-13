@@ -57,7 +57,7 @@ public class DatabaseAdminTest {
 
         couchServer = new CouchServer(couchSetup);
         CouchFeatureSet featureSet = CouchFeatureSet.builder().add(CouchFeature.ALLOW_DB_DELETE, true).build();
-        database = couchServer.database("couchace-admin-test", featureSet);
+        database = couchServer.database("test-couchace-admin", featureSet);
 
         // Ensure database does not exist
         if (database.exists()) {
