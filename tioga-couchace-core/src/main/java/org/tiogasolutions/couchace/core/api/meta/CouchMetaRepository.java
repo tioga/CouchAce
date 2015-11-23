@@ -37,9 +37,9 @@ public class CouchMetaRepository {
         this.metaBuilder = new AnnotationCouchMetaBuilder();
     }
 
+    @SuppressWarnings("unchecked")
     public <T> CouchEntityMeta<T> getEntityMeta(Class<T> type) {
         String name = type.getName();
-        //noinspection unchecked
         return (CouchEntityMeta<T>) entityMetaMap.get(name);
     }
 
