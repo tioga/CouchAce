@@ -30,8 +30,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
 public class CouchJacksonSerializerIntrospector extends JacksonAnnotationIntrospector {
+
     private static final Logger log = LoggerFactory.getLogger(CouchJacksonSerializerIntrospector.class);
 
     private final CouchMetaRepository couchMetaRepository;
@@ -56,7 +56,7 @@ public class CouchJacksonSerializerIntrospector extends JacksonAnnotationIntrosp
                 // This is a CouchEntity look for others properties to ignore.
                 Set<String> ignorePropertySet = new HashSet<>();
 
-                CouchEntityMeta entityMeta = couchMetaRepository.getOrCreateEntityMeta(ac.getRawType());
+                CouchEntityMeta<?> entityMeta = couchMetaRepository.getOrCreateEntityMeta(ac.getRawType());
                 if (entityMeta != null) {
                     // Ignore id property, if it does not have a pattern.
                     if (entityMeta.hasId() && entityMeta.getIdPattern() == null) {
@@ -68,7 +68,6 @@ public class CouchJacksonSerializerIntrospector extends JacksonAnnotationIntrosp
                     }
                     // Ignore revision property.
                     if (entityMeta.hasEmbeddedAttachments()) {
-                        // Not sure why entityMeta.getEmbeddedAttachmentMetaList() is not being seen as a List<CouchEmbeddedAttachmentMeta>
                         List<CouchEmbeddedAttachmentMeta> attachmentMetaList = entityMeta.getEmbeddedAttachmentMetaList();
                         for (CouchEmbeddedAttachmentMeta embeddedAttachmentMeta : attachmentMetaList) {
                             ignorePropertySet.add(embeddedAttachmentMeta.getValueAccessor().getPropertyName());
