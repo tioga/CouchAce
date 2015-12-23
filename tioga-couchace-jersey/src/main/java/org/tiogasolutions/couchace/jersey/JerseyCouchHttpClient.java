@@ -296,8 +296,13 @@ public class JerseyCouchHttpClient implements CouchHttpClient {
     protected WebTarget newWebTarget(String url) {
         url = (url == null) ? "" : url;
 
-        // Relative
-        String middle = (url.endsWith("/")) ? "" : "/";
+        if (baseUrl.endsWith("/") && url.startsWith("/")) {
+          // They don't both need a slash.
+          url = url.substring(1);
+        }
+
+        String middle;
+        middle = (baseUrl.endsWith("/") || url.startsWith("/")) ? "" : "/";
         String absoluteUrl = baseUrl + middle + url;
 
         return client.target(absoluteUrl);
