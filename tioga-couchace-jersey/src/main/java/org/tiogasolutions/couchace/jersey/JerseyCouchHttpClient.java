@@ -34,6 +34,9 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.*;
 import java.net.URI;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * User: harlan
@@ -83,14 +86,17 @@ public class JerseyCouchHttpClient implements CouchHttpClient {
                 .put(entity);
 
             CouchHttpStatus statusCode = CouchHttpStatus.findByCode(response.getStatus());
-            String eTag = getETag(response);
+            String eTag = getETag(response, null);
+
             byte[] content = response.readEntity(byte[].class);
             CouchMediaType mediaType = CouchMediaType.fromString(response.getMediaType().toString());
             int contentLength = response.getLength();
+
             return CouchHttpResponse.builder(CouchMethodType.PUT, webTarget.getUri(), statusCode)
                 .setEtag(eTag)
                 .setContent(mediaType, contentLength, content)
                 .build();
+
         } catch (Throwable ex) {
             throw CouchHttpException.internalServerError(ex);
         }
@@ -103,14 +109,17 @@ public class JerseyCouchHttpClient implements CouchHttpClient {
             Response response = webTarget.request().delete();
 
             CouchHttpStatus statusCode = CouchHttpStatus.findByCode(response.getStatus());
-            String eTag = getETag(response);
+            String eTag = getETag(response, null);
+
             byte[] content = response.readEntity(byte[].class);
             CouchMediaType mediaType = CouchMediaType.fromString(response.getMediaType().toString());
             int contentLength = response.getLength();
+
             return CouchHttpResponse.builder(CouchMethodType.DELETE, webTarget.getUri(), statusCode)
                 .setEtag(eTag)
                 .setContent(mediaType, contentLength, content)
                 .build();
+
         } catch (Throwable ex) {
             throw CouchHttpException.internalServerError(ex);
         }
@@ -193,8 +202,9 @@ public class JerseyCouchHttpClient implements CouchHttpClient {
                 webTarget = webTarget.queryParam(queryParam.getName(), queryParam.getValue());
             }
 
-            Response postResponse = webTarget.request(MediaType.APPLICATION_JSON_TYPE)
-                .post(entity);
+            Response postResponse = webTarget
+              .request(MediaType.APPLICATION_JSON_TYPE)
+              .post(entity);
 
             URI uri = webTarget.getUri();
             if (log.isDebugEnabled()) {
@@ -203,9 +213,9 @@ public class JerseyCouchHttpClient implements CouchHttpClient {
 
             String documentId = UriUtil.lastPathElement(postResponse.getLocation());
 
-
             // Build our response.
             return buildCouchResponse(request, uri, postResponse, documentId);
+
         } catch (Throwable ex) {
             throw CouchHttpException.internalServerError(ex);
         }
@@ -316,33 +326,83 @@ public class JerseyCouchHttpClient implements CouchHttpClient {
         return webTarget;
     }
 
-    protected String getETag(Response response) {
-        String eTag = response.getHeaderString("Etag");
-        if (eTag != null && (eTag.charAt(0) == '"')) {
-            // Remove enclosing quotes
-            eTag = eTag.substring(1, eTag.length() - 1);
+  /**
+   * This method is 100% hack. Cloudant is not producing a valid eTag and so we
+   * are having to parse the document to look for the revision.
+   * @param json the text from which the revision will be parsed.
+   * @return the document's revision
+   */
+    protected String parseRevision(String json) {
+      if (json == null) {
+        return null;
+      }
+
+      int posA = json.indexOf("\"rev\"");
+      if (posA < 0) return null;
+
+      posA = json.indexOf(":", posA+5);
+      if (posA < 0) return null;
+
+      posA = json.indexOf("\"", posA+1);
+      if (posA < 0) return null;
+
+      int posB = json.indexOf("\"", posA+1);
+      if (posB < 0) return null;
+
+      return json.substring(posA+1, posB);
+    }
+
+    protected String getETag(Response response, String json) {
+
+      String eTag = null;
+
+      // Rewritten to do a case-insensitive lookup of the ETag.
+      Set<Map.Entry<String, List<String>>> headers = response.getStringHeaders().entrySet();
+      for (Map.Entry<String, List<String>> entry : headers) {
+        if ("ETag".equalsIgnoreCase(entry.getKey())) {
+          List<String> values = entry.getValue();
+          eTag = values.isEmpty() ? null : values.get(0);
+          break;
         }
-        return eTag;
+      }
+
+      if (eTag != null && (eTag.charAt(0) == '"')) {
+          // Remove enclosing quotes
+          eTag = eTag.substring(1, eTag.length() - 1);
+      }
+
+      if (eTag == null && response.getMediaType().equals(MediaType.APPLICATION_JSON_TYPE)) {
+        // HACK, HACK, HACK...
+        eTag = parseRevision(json);
+      }
+
+      return eTag;
     }
 
     protected CouchHttpResponse buildCouchResponse(HttpRequest request, URI uri, Response response, String documentId) {
         CouchHttpStatus statusCode = CouchHttpStatus.findByCode(response.getStatus());
-        String eTag = getETag(response);
+
         CouchMediaType mediaType = CouchMediaType.fromString(response.getMediaType().toString());
 
+        String eTag;
         Object content;
+
         if (mediaType.isTextType()) {
-            content = response.readEntity(String.class);
+            String text = response.readEntity(String.class);
+            eTag = getETag(response, text);
+            content = text;
+
         } else {
+            eTag = getETag(response, null);
             content = response.readEntity(byte[].class);
         }
 
         int contentLength = response.getLength();
+
         return CouchHttpResponse.builder(request.getMethodType(), uri, statusCode)
             .setDocumentId(documentId)
             .setEtag(eTag)
             .setContent(mediaType, contentLength, content)
             .build();
     }
-
 }
