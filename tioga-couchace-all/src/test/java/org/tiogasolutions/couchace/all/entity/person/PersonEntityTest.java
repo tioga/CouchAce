@@ -127,11 +127,13 @@ public class PersonEntityTest {
         assertEquals(putResponse.getDocumentId(), documentOneId);
         assertNotNull(putResponse.getDocumentRevision());
         String initialVersionOne = putResponse.getDocumentRevision();
+
         putResponse = couchDatabase.put().entity(personEntityTwo).execute();
         assertEquals(putResponse.getHttpStatus(), CouchHttpStatus.CREATED);
         assertEquals(putResponse.getDocumentId(), documentTwoId);
         assertNotNull(putResponse.getDocumentRevision());
         String initialVersionTwo = putResponse.getDocumentRevision();
+
         putResponse = couchDatabase.put().entity(personEntityThree).execute();
         assertEquals(putResponse.getHttpStatus(), CouchHttpStatus.CREATED);
         assertEquals(putResponse.getDocumentId(), documentThreeId);
@@ -144,10 +146,12 @@ public class PersonEntityTest {
             .key("person")
             .includeDocs(false)
             .build();
+
         GetDocumentResponse countResponse = couchDatabase
                 .get()
                 .document(couchViewQuery)
                 .execute();
+
         assertTrue(countResponse.isOk(), countResponse.getErrorReason());
         assertEquals(countResponse.getFirstContentAsLong(), new Long(3));
 

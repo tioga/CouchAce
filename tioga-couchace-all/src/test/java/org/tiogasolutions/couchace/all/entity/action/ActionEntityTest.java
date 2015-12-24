@@ -42,7 +42,7 @@ public class ActionEntityTest {
 
     private int nextId = 7000;
 
-    public void actionEntityTest() {
+    public void actionEntityTest() throws Exception {
 
         // Perform an initial count, should be zero
         CouchViewQuery couchViewQuery = CouchViewQuery
@@ -59,17 +59,22 @@ public class ActionEntityTest {
         // Add actions
         SpeakActionEntity speakAction = SpeakActionEntity.newSpeak(newId(), "Speak something", "Hello");
         putAction(speakAction);
+
         WalkActionEntity walkAction = WalkActionEntity.newWalk(newId(), "Take a walk", 10);
         putAction(walkAction);
+
         SleepActionEntity sleepAction = SleepActionEntity.newSleep(newId(), "Going to nappy house", 10);
         putAction(sleepAction);
 
         // Check count - should be initial + 3
+        TestSetup.giveCouchASecondOrSo();
+
         long newActionCount = couchDatabase
             .get()
             .document(couchViewQuery)
             .execute()
             .getFirstContentAsLong();
+
         assertEquals(newActionCount, initialActionCount + 3);
 
         // Retrieve the speak action.

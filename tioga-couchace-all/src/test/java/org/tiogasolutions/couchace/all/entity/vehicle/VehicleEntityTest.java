@@ -68,9 +68,12 @@ public class VehicleEntityTest {
             .put()
             .entity(firebird)
             .execute();
+
         assertEquals(putResponse.getDocumentId(), firebirdId);
         assertEquals(putResponse.getHttpStatus(), CouchHttpStatus.CREATED);
         assertNotNull(putResponse.getDocumentRevision());
+
+        TestSetup.giveCouchASecondOrSo();
 
         // Check count
         long newVehicleCount = couchDatabase

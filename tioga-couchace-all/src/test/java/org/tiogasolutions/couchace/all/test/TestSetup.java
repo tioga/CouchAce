@@ -16,6 +16,7 @@
 
 package org.tiogasolutions.couchace.all.test;
 
+import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import org.tiogasolutions.couchace.core.api.CouchDatabase;
 import org.tiogasolutions.couchace.core.api.CouchServer;
 import org.tiogasolutions.couchace.core.api.CouchSetup;
@@ -25,9 +26,9 @@ import org.tiogasolutions.couchace.core.api.response.WriteResponse;
 import org.tiogasolutions.couchace.core.internal.util.IOUtil;
 import org.tiogasolutions.couchace.jackson.JacksonCouchJsonStrategy;
 import org.tiogasolutions.couchace.jersey.JerseyCouchHttpClient;
-import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 
 import java.io.File;
+import java.net.URI;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -45,15 +46,19 @@ public class TestSetup {
     private static TestSetup singleton = null;
 
     public static final String databaseName = "test-couchace";
-    public static final String userName = "couchace";
-    public static final String password = "unittest";
+    public static final String userName = "parr";
+    public static final String password = "go2Cloudant";
 
     public static final String storePass = "ZWYyazhISHFt";
 
-    //  private static final String couchUrlSsl = "https://localhost:6984"
-    public static final String couchUrl = "http://localhost:5984";
+    //  private static final String couchUrlSsl = "http://parr.cloudant.com:6984"
+    public static final String couchUrl = "http://parr.cloudant.com";
 
     private byte[] imageBytes;
+
+    public static boolean isCloudant() {
+      return couchUrl.endsWith(".cloudant.com");
+    }
 
     public static TestSetup singleton() {
         if (singleton == null) {
@@ -95,8 +100,11 @@ public class TestSetup {
 
         // Add the Entity design doc
         URL designUrl = getClass().getClassLoader().getResource("design/entity-design.json");
-        WriteResponse response = couchDatabase.put().design("entity", designUrl).execute();
-        assertTrue(response.isCreated());
+        WriteResponse response = couchDatabase
+          .put()
+          .design("entity", designUrl)
+          .execute();
+        assertTrue(response.isCreated(), "Was " + response.getHttpStatus());
 
         // Add the Person design doc
         designUrl = getClass().getClassLoader().getResource("design/person-design.json");
@@ -115,8 +123,10 @@ public class TestSetup {
 
         // Read the image bytes
         try {
-            Path path = Paths.get(getClass().getClassLoader().getResource("AceOfSpades.jpg").toURI());
+            URI uri = getClass().getClassLoader().getResource("AceOfSpades.jpg").toURI();
+            Path path = Paths.get(uri);
             imageBytes = Files.readAllBytes(path);
+
         } catch (Exception ex) {
             throw new RuntimeException("Error reading image.", ex);
         }
@@ -132,5 +142,21 @@ public class TestSetup {
 
     public CouchDatabase getCouchDatabase() {
         return couchDatabase;
+    }
+
+    /**
+     * Wait just a little for the DB to get catch up.
+     */
+    public static void giveCouchASecondOrSo() {
+      try {
+        // Two seconds might be a bit excessive, lower values
+        // were working, but considering this is just unit tests
+        // we are being extra generous.
+        if (isCloudant()) {
+          Thread.sleep(2000);
+        }
+      } catch (InterruptedException e) {
+        Thread.interrupted();
+      }
     }
 }
