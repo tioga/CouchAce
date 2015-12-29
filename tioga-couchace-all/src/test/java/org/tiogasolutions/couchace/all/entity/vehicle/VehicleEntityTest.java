@@ -73,8 +73,6 @@ public class VehicleEntityTest {
         assertEquals(putResponse.getHttpStatus(), CouchHttpStatus.CREATED);
         assertNotNull(putResponse.getDocumentRevision());
 
-        TestSetup.giveCouchASecondOrSo();
-
         // Check count
         long newVehicleCount = couchDatabase
             .get()

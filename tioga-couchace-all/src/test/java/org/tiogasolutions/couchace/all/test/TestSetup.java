@@ -143,20 +143,4 @@ public class TestSetup {
     public CouchDatabase getCouchDatabase() {
         return couchDatabase;
     }
-
-    /**
-     * Wait just a little for the DB to get catch up.
-     */
-    public static void giveCouchASecondOrSo() {
-      try {
-        // Two seconds might be a bit excessive, lower values
-        // were working, but considering this is just unit tests
-        // we are being extra generous.
-        if (isCloudant()) {
-          Thread.sleep(2000);
-        }
-      } catch (InterruptedException e) {
-        Thread.interrupted();
-      }
-    }
 }

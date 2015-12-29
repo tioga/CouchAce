@@ -159,8 +159,6 @@ public class DatabaseAdminTest {
         assertEquals(documentResponse.getDocumentCount(), 1);
 
         // Get count using built in _all_docs
-        TestSetup.giveCouchASecondOrSo();
-
         documentResponse = database
             .get()
             .document("_all_docs")
@@ -192,8 +190,6 @@ public class DatabaseAdminTest {
         assertTrue(response.isOk(), response.getErrorReason());
 
         // Count should be zero using all view
-        TestSetup.giveCouchASecondOrSo();
-
         documentResponse = database
                 .get()
                 .document(viewQuery)
@@ -203,8 +199,6 @@ public class DatabaseAdminTest {
         assertEquals(documentResponse.getDocumentCount(), 0);
 
         // Count using _all_docs should be one
-        TestSetup.giveCouchASecondOrSo();
-
         documentResponse = database
             .get()
             .document("_all_docs")
@@ -234,8 +228,6 @@ public class DatabaseAdminTest {
         assertEquals(documentResponse.getDocumentCount(), 1);
 
         // Count using _all_docs should be two
-        TestSetup.giveCouchASecondOrSo();
-
         documentResponse = database
             .get()
             .document("_all_docs")
@@ -257,8 +249,6 @@ public class DatabaseAdminTest {
         assertTrue(response.isOk(), response.getErrorReason());
 
         // Count using _all_docs should be one
-        TestSetup.giveCouchASecondOrSo();
-
         documentResponse = database
             .get()
             .document("_all_docs")
@@ -280,8 +270,6 @@ public class DatabaseAdminTest {
         assertTrue(response.isOk(), response.getErrorReason());
 
         // Count using _all_docs should be one
-        TestSetup.giveCouchASecondOrSo();
-
         documentResponse = database
             .get()
             .document("_all_docs")

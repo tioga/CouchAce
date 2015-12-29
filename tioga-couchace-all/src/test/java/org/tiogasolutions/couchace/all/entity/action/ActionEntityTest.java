@@ -67,8 +67,6 @@ public class ActionEntityTest {
         putAction(sleepAction);
 
         // Check count - should be initial + 3
-        TestSetup.giveCouchASecondOrSo();
-
         long newActionCount = couchDatabase
             .get()
             .document(couchViewQuery)
