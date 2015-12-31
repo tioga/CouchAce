@@ -106,7 +106,10 @@ public class DocumentTest {
     public void postTest() {
 
         // Post the document
-        WriteResponse response = couchDatabase.post().document(docThreeJson).execute();
+        WriteResponse response = couchDatabase
+          .post()
+          .document(docThreeJson)
+          .execute();
 
         // Verify
         assertNotNull(response.getDocumentId());

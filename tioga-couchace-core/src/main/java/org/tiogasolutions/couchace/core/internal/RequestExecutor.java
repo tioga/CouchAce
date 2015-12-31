@@ -245,12 +245,14 @@ public class RequestExecutor {
 
     protected WriteResponse executePutAttachment(PutAttachmentRequest request) {
         HttpPutRequest httpPutRequest = httpRequestFactory.newHttpPutRequest(request);
-        return new WriteResponse(httpClient.put(httpPutRequest));
+        CouchHttpResponse response = httpClient.put(httpPutRequest);
+        return new WriteResponse(response);
     }
 
     protected WriteResponse executePutDesign(PutDesignRequest request) {
         HttpPutRequest httpPutRequest = httpRequestFactory.newHttpPutRequest(request);
-        return new WriteResponse(httpClient.put(httpPutRequest));
+        CouchHttpResponse response = httpClient.put(httpPutRequest);
+        return new WriteResponse(response);
     }
 
     protected WriteResponse executePutDatabase(PutDatabaseRequest request) {

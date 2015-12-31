@@ -98,6 +98,7 @@ public class NotificationTest {
                 .attachment(notification.getId(), notification.getRevision(), FIRST_ATTACHMENT_NAME, CouchMediaType.TEXT_HTML, FIRST_ATTACHMENT_CONTENT)
                 .onError(r -> fail(r.getErrorReason()))
                 .execute();
+
         Assert.assertEquals(writeAttachmentResponse.getHttpStatus(), CouchHttpStatus.CREATED);
 
         // Retrieve the attachment
@@ -114,6 +115,7 @@ public class NotificationTest {
                 .onError(r -> fail(r.getErrorReason()))
                 .execute()
                 .getFirstEntity();
+
         Assert.assertEquals(writeAttachmentResponse.getDocumentRevision(), notification.getRevision());
 
         // Ensure the notification has attachment meta.

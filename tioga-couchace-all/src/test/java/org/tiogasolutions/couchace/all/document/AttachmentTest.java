@@ -87,6 +87,7 @@ public class AttachmentTest {
                 CouchMediaType.TEXT_HTML,
                 htmlContent)
             .execute();
+
         assertEquals(putAttachResponse.getHttpStatus(), CouchHttpStatus.CREATED);
         assertTrue(putAttachResponse.isCreated());
         assertNotNull(putAttachResponse.getDocumentRevision());

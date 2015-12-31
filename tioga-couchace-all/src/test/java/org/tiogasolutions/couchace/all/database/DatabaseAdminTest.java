@@ -16,6 +16,7 @@
 
 package org.tiogasolutions.couchace.all.database;
 
+import org.testng.SkipException;
 import org.tiogasolutions.couchace.all.test.TestSetup;
 import org.tiogasolutions.couchace.core.api.CouchDatabase;
 import org.tiogasolutions.couchace.core.api.CouchException;
@@ -103,8 +104,11 @@ public class DatabaseAdminTest {
     }
 
     public void compactDatabaseTest() {
+        if (TestSetup.isCloudant()) {
+          throw new SkipException("Compaction is automatic on Cloudant");
+        }
         WriteResponse response = database.post().database("_compact").execute();
-        assertEquals(response.getHttpStatus(), CouchHttpStatus.ACCEPTED);
+        assertEquals(response.getHttpStatus(), CouchHttpStatus.ACCEPTED, response.getErrorReason());
     }
 
     public void viewCleanupDatabaseTest() {
@@ -120,7 +124,7 @@ public class DatabaseAdminTest {
 
     }
 
-    public void createAndDeleteDocuments() {
+    public void createAndDeleteDocuments() throws Exception {
 
         // Create a view
         URL designUrl = getClass().getClassLoader().getResource("design/simple-design.json");
@@ -128,11 +132,13 @@ public class DatabaseAdminTest {
                 .put()
                 .design("simple", designUrl)
                 .execute();
+
         assertEquals(response.getHttpStatus(), CouchHttpStatus.CREATED);
         GetDocumentResponse documentResponse = database
                 .get()
                 .document("_design/simple")
                 .execute();
+
         assertTrue(documentResponse.isOk(), documentResponse.getErrorReason());
         assertEquals(documentResponse.getDocumentCount(), 1);
 
@@ -142,11 +148,13 @@ public class DatabaseAdminTest {
                 .put()
                 .document(docId, "{\"direction\" : \"NORTH\",\"city\" : \"Toronto\"}")
                 .execute();
+
         assertTrue(response.isCreated(), response.getErrorReason());
         documentResponse = database
                 .get()
                 .document(docId)
                 .execute();
+
         assertTrue(documentResponse.isOk(), documentResponse.getErrorReason());
         assertEquals(documentResponse.getDocumentCount(), 1);
 
@@ -155,6 +163,7 @@ public class DatabaseAdminTest {
             .get()
             .document("_all_docs")
             .execute();
+
         assertTrue(documentResponse.isOk(), documentResponse.getErrorReason());
         assertEquals(documentResponse.getDocumentCount(), 2);
         for (TextDocument doc : documentResponse.getDocumentList()) {
@@ -168,6 +177,7 @@ public class DatabaseAdminTest {
                 .get()
                 .document(viewQuery)
                 .execute();
+
         assertTrue(documentResponse.isOk(), documentResponse.getErrorReason());
         assertEquals(documentResponse.getDocumentCount(), 1);
 
@@ -176,6 +186,7 @@ public class DatabaseAdminTest {
                 .delete()
                 .allNonDesigns()
                 .execute();
+
         assertTrue(response.isOk(), response.getErrorReason());
 
         // Count should be zero using all view
@@ -183,6 +194,7 @@ public class DatabaseAdminTest {
                 .get()
                 .document(viewQuery)
                 .execute();
+
         assertTrue(documentResponse.isOk(), documentResponse.getErrorReason());
         assertEquals(documentResponse.getDocumentCount(), 0);
 
@@ -191,6 +203,7 @@ public class DatabaseAdminTest {
             .get()
             .document("_all_docs")
             .execute();
+
         assertTrue(documentResponse.isOk(), documentResponse.getErrorReason());
         assertEquals(documentResponse.getDocumentCount(), 1);
         for (TextDocument doc : documentResponse.getDocumentList()) {
@@ -204,11 +217,13 @@ public class DatabaseAdminTest {
             .put()
             .document(docId, "{\"direction\" : \"NORTH\",\"city\" : \"Toronto\"}")
             .execute();
+
         assertTrue(response.isCreated(), response.getErrorReason());
         documentResponse = database
             .get()
             .document(docId)
             .execute();
+
         assertTrue(documentResponse.isOk(), documentResponse.getErrorReason());
         assertEquals(documentResponse.getDocumentCount(), 1);
 
@@ -217,6 +232,7 @@ public class DatabaseAdminTest {
             .get()
             .document("_all_docs")
             .execute();
+
         assertTrue(documentResponse.isOk(), documentResponse.getErrorReason());
         assertEquals(documentResponse.getDocumentCount(), 2);
         for (TextDocument doc : documentResponse.getDocumentList()) {
@@ -229,6 +245,7 @@ public class DatabaseAdminTest {
             .delete()
             .allDesigns()
             .execute();
+
         assertTrue(response.isOk(), response.getErrorReason());
 
         // Count using _all_docs should be one
@@ -236,6 +253,7 @@ public class DatabaseAdminTest {
             .get()
             .document("_all_docs")
             .execute();
+
         assertTrue(documentResponse.isOk(), documentResponse.getErrorReason());
         assertEquals(documentResponse.getDocumentCount(), 1);
         for (TextDocument doc : documentResponse.getDocumentList()) {
@@ -248,6 +266,7 @@ public class DatabaseAdminTest {
             .delete()
             .allDocuments()
             .execute();
+
         assertTrue(response.isOk(), response.getErrorReason());
 
         // Count using _all_docs should be one
@@ -255,8 +274,10 @@ public class DatabaseAdminTest {
             .get()
             .document("_all_docs")
             .execute();
+
         assertTrue(documentResponse.isOk(), documentResponse.getErrorReason());
         assertEquals(documentResponse.getDocumentCount(), 0);
+
         for (TextDocument doc : documentResponse.getDocumentList()) {
             assertNotNull(doc.getDocumentId());
             assertNotNull(doc.getDocumentRevision());
