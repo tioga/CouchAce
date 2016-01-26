@@ -16,12 +16,13 @@
 package org.tiogasolutions.couchace.core.spi.http;
 
 import org.tiogasolutions.couchace.core.api.http.CouchHttpStatus;
-import org.tiogasolutions.couchace.core.api.response.CouchErrorContent;
 import org.tiogasolutions.couchace.core.api.http.CouchMediaType;
 import org.tiogasolutions.couchace.core.api.http.CouchMethodType;
+import org.tiogasolutions.couchace.core.api.response.CouchErrorContent;
 import org.tiogasolutions.couchace.core.internal.util.ArgUtil;
 
 import java.net.URI;
+import java.util.Arrays;
 
 /**
  * User: harlan
@@ -121,7 +122,22 @@ public class CouchHttpResponse {
     }
 
     public String getStringContent() {
-        return (content != null) ? content.toString() : null;
+        String stringContent;
+        if (content == null) {
+            stringContent = null;
+
+        } else if (content instanceof byte[]) {
+            byte[] bytes = (byte[]) content;
+            stringContent = new String(bytes);
+
+        } else if (content.getClass().isArray()) {
+            Object array = (Object[])content;
+            stringContent = Arrays.asList(array).toString();
+
+        } else {
+            stringContent = content.toString();
+        }
+        return stringContent;
     }
 
     public Long getLongContent() {
