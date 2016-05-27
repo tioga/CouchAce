@@ -228,7 +228,7 @@ public class PutRequestFactory {
         ArgUtil.assertNotNull(designName, "designName");
         ArgUtil.assertNotNull(designContent, "designContent");
         ArgUtil.assertNotNull(documentRevision, "documentRevision");
-        return new PutDesignRequest(requestExecutor, designName, documentRevision, designContent);
+        return new PutDesignRequest(requestExecutor, designName, designContent, documentRevision);
     }
 
     public PutDesignRequest design(String designName, Path designFile, String documentRevision) {
@@ -236,7 +236,7 @@ public class PutRequestFactory {
         ArgUtil.assertNotNull(designFile, "designContent");
         ArgUtil.assertNotNull(documentRevision, "documentRevision");
         String designBody = IOUtil.readText(designFile);
-        return new PutDesignRequest(requestExecutor, designName, documentRevision, designBody);
+        return new PutDesignRequest(requestExecutor, designName, designBody, documentRevision);
     }
 
     public PutDesignRequest design(String designName, URL designFile, String documentRevision) {
@@ -244,7 +244,7 @@ public class PutRequestFactory {
         ArgUtil.assertNotNull(designFile, "designFile");
         ArgUtil.assertNotNull(documentRevision, "documentRevision");
         String designBody = IOUtil.readText(designFile);
-        return new PutDesignRequest(requestExecutor, designName, documentRevision, designBody);
+        return new PutDesignRequest(requestExecutor, designName, designBody, documentRevision);
     }
 
 }
