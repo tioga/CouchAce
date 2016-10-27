@@ -16,18 +16,20 @@
 
 package org.tiogasolutions.couchace.all.entity.action;
 
+import org.testng.annotations.Test;
 import org.tiogasolutions.couchace.all.test.TestSetup;
 import org.tiogasolutions.couchace.core.api.CouchDatabase;
 import org.tiogasolutions.couchace.core.api.http.CouchHttpStatus;
-import org.tiogasolutions.couchace.core.api.response.WriteResponse;
 import org.tiogasolutions.couchace.core.api.query.CouchViewQuery;
-import org.testng.annotations.Test;
+import org.tiogasolutions.couchace.core.api.response.WriteResponse;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 /**
  * User: harlan
@@ -130,7 +132,11 @@ public class ActionEntityTest {
             .entity(actionEntity)
             .execute();
         assertEquals(putResponse.getDocumentId(), "Action:" + actionEntity.getId());
-        assertEquals(putResponse.getHttpStatus(), CouchHttpStatus.CREATED);
+
+        List<CouchHttpStatus> expected = Arrays.asList(CouchHttpStatus.CREATED, CouchHttpStatus.ACCEPTED);
+        CouchHttpStatus actual = putResponse.getHttpStatus();
+        assertTrue(expected.contains(actual), "Found " + actual);
+
         assertNotNull(putResponse.getDocumentRevision());
 
         actions.add(actionEntity);
