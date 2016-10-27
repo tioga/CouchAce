@@ -1,7 +1,3 @@
 <component name="CopyrightManager">
-  <settings default="couchace-apache">
-    <module2copyright>
-      <element module="couchace-source" copyright="couchace-apache" />
-    </module2copyright>
-  </settings>
+  <settings default="" />
 </component>

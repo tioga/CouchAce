@@ -2,12 +2,22 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CouchAce.iml" filepath="$PROJECT_DIR$/CouchAce.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tioga-couchace-all/tioga-couchace-all.iml" filepath="$PROJECT_DIR$/tioga-couchace-all/tioga-couchace-all.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tioga-couchace-annotations/tioga-couchace-annotations.iml" filepath="$PROJECT_DIR$/tioga-couchace-annotations/tioga-couchace-annotations.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tioga-couchace-core/tioga-couchace-core.iml" filepath="$PROJECT_DIR$/tioga-couchace-core/tioga-couchace-core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tioga-couchace-jackson/tioga-couchace-jackson.iml" filepath="$PROJECT_DIR$/tioga-couchace-jackson/tioga-couchace-jackson.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tioga-couchace-jersey/tioga-couchace-jersey.iml" filepath="$PROJECT_DIR$/tioga-couchace-jersey/tioga-couchace-jersey.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CouchAce.iml" filepath="$PROJECT_DIR$/.idea/modules/CouchAce.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-couchace-all/tioga-couchace-all.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-couchace-all/tioga-couchace-all.iml" group="tioga-couchace-all" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-couchace-all/tioga-couchace-all_main.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-couchace-all/tioga-couchace-all_main.iml" group="tioga-couchace-all" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-couchace-all/tioga-couchace-all_test.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-couchace-all/tioga-couchace-all_test.iml" group="tioga-couchace-all" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-couchace-annotations/tioga-couchace-annotations.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-couchace-annotations/tioga-couchace-annotations.iml" group="tioga-couchace-annotations" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-couchace-annotations/tioga-couchace-annotations_main.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-couchace-annotations/tioga-couchace-annotations_main.iml" group="tioga-couchace-annotations" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-couchace-annotations/tioga-couchace-annotations_test.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-couchace-annotations/tioga-couchace-annotations_test.iml" group="tioga-couchace-annotations" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-couchace-core/tioga-couchace-core.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-couchace-core/tioga-couchace-core.iml" group="tioga-couchace-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-couchace-core/tioga-couchace-core_main.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-couchace-core/tioga-couchace-core_main.iml" group="tioga-couchace-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-couchace-core/tioga-couchace-core_test.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-couchace-core/tioga-couchace-core_test.iml" group="tioga-couchace-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-couchace-jackson/tioga-couchace-jackson.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-couchace-jackson/tioga-couchace-jackson.iml" group="tioga-couchace-jackson" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-couchace-jackson/tioga-couchace-jackson_main.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-couchace-jackson/tioga-couchace-jackson_main.iml" group="tioga-couchace-jackson" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-couchace-jackson/tioga-couchace-jackson_test.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-couchace-jackson/tioga-couchace-jackson_test.iml" group="tioga-couchace-jackson" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-couchace-jersey/tioga-couchace-jersey.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-couchace-jersey/tioga-couchace-jersey.iml" group="tioga-couchace-jersey" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-couchace-jersey/tioga-couchace-jersey_main.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-couchace-jersey/tioga-couchace-jersey_main.iml" group="tioga-couchace-jersey" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-couchace-jersey/tioga-couchace-jersey_test.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-couchace-jersey/tioga-couchace-jersey_test.iml" group="tioga-couchace-jersey" />
     </modules>
   </component>
 </project>

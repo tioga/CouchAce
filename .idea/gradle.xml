@@ -3,20 +3,12 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="distributionType" value="LOCAL" />
+        <option name="createEmptyContentRootDirectories" value="true" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="D:/tools/gradle/gradle-1.9" />
+        <option name="gradleHome" value="/tools/gradle-2.4" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
         <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/tioga-couchace-all" />
-            <option value="$PROJECT_DIR$/tioga-couchace-annotations" />
-            <option value="$PROJECT_DIR$/tioga-couchace-core" />
-            <option value="$PROJECT_DIR$/tioga-couchace-jackson" />
-            <option value="$PROJECT_DIR$/tioga-couchace-jersey" />
-          </set>
-        </option>
-        <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/tioga-couchace-all" />
