@@ -23,8 +23,8 @@ project(':tioga-couchace-jackson') {
 
         compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.5.2")
 
-        testCompile("ch.qos.logback:logback-core:1.1.3")
-        testCompile("ch.qos.logback:logback-classic:1.1.3")
+        testCompile("ch.qos.logback:logback-core:1.1.7")
+        testCompile("ch.qos.logback:logback-classic:1.1.7")
     }
 
     apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))

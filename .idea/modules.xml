@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CouchAce.iml" filepath="$PROJECT_DIR$/.idea/modules/CouchAce.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/couchace.iml" filepath="$PROJECT_DIR$/.idea/modules/couchace.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-couchace-all/tioga-couchace-all.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-couchace-all/tioga-couchace-all.iml" group="tioga-couchace-all" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-couchace-all/tioga-couchace-all_main.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-couchace-all/tioga-couchace-all_main.iml" group="tioga-couchace-all" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-couchace-all/tioga-couchace-all_test.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-couchace-all/tioga-couchace-all_test.iml" group="tioga-couchace-all" />

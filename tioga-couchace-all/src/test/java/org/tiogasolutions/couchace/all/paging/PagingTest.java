@@ -106,8 +106,8 @@ public class PagingTest {
         assertTrue(pageNavigation.hasPreviousPage());
         assertTrue(pageNavigation.hasNextPage());
         assertTrue(pageNavigation.hasRequestedPage());
-        assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byType?startkey=%22DOG%22&startkey_docid=Pet:5&skip=1&descending=true&key=%22DOG%22");
-        assertEquals(pageNavigation.getNextPage(), "_design/pet/_view/byType?startkey=%22DOG%22&startkey_docid=Pet:6&skip=1&descending=false&key=%22DOG%22");
+        assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byType?startkey=%22DOG%22&startkey_docid=Pet%3A5&skip=1&descending=true&key=%22DOG%22");
+        assertEquals(pageNavigation.getNextPage(), "_design/pet/_view/byType?startkey=%22DOG%22&startkey_docid=Pet%3A6&skip=1&descending=false&key=%22DOG%22");
 
         // Third page
         er = couchDatabase.get().entity(PetEntity.class, pageNavigation.queryNextPage()).execute();
@@ -118,7 +118,7 @@ public class PagingTest {
         assertNotNull(pageNavigation);
         assertTrue(pageNavigation.hasPreviousPage());
         assertFalse(pageNavigation.hasNextPage());
-        assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byType?startkey=%22DOG%22&startkey_docid=Pet:7&skip=1&descending=true&key=%22DOG%22");
+        assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byType?startkey=%22DOG%22&startkey_docid=Pet%3A7&skip=1&descending=true&key=%22DOG%22");
 
         // Previous to Second page
         er = couchDatabase.get().entity(PetEntity.class, pageNavigation.queryPreviousPage()).execute();
@@ -207,7 +207,7 @@ public class PagingTest {
         assertFalse(pageNavigation.hasPreviousPage());
         assertTrue(pageNavigation.hasNextPage());
         assertTrue(pageNavigation.hasRequestedPage());
-        assertEquals(pageNavigation.getNextPage(), "_design/pet/_view/byType?startkey=%22DOG%22&startkey_docid=Pet:3&skip=1&descending=false&endkey=%22DOG%22");
+        assertEquals(pageNavigation.getNextPage(), "_design/pet/_view/byType?startkey=%22DOG%22&startkey_docid=Pet%3A3&skip=1&descending=false&endkey=%22DOG%22");
 
         // Second page
         er = couchDatabase.get().entity(PetEntity.class, pageNavigation.queryNextPage()).execute();
@@ -221,8 +221,8 @@ public class PagingTest {
         assertTrue(pageNavigation.hasPreviousPage());
         assertTrue(pageNavigation.hasNextPage());
         assertTrue(pageNavigation.hasRequestedPage());
-        assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byType?startkey=%22DOG%22&startkey_docid=Pet:4&skip=1&descending=true&endkey=%22DOG%22");
-        assertEquals(pageNavigation.getNextPage(), "_design/pet/_view/byType?startkey=%22DOG%22&startkey_docid=Pet:6&skip=1&descending=false&endkey=%22DOG%22");
+        assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byType?startkey=%22DOG%22&startkey_docid=Pet%3A4&skip=1&descending=true&endkey=%22DOG%22");
+        assertEquals(pageNavigation.getNextPage(), "_design/pet/_view/byType?startkey=%22DOG%22&startkey_docid=Pet%3A6&skip=1&descending=false&endkey=%22DOG%22");
 
         // Third page
         er = couchDatabase.get().entity(PetEntity.class, pageNavigation.queryNextPage()).execute();
@@ -233,7 +233,7 @@ public class PagingTest {
         assertNotNull(pageNavigation);
         assertTrue(pageNavigation.hasPreviousPage());
         assertFalse(pageNavigation.hasNextPage());
-        assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byType?startkey=%22DOG%22&startkey_docid=Pet:7&skip=1&descending=true&endkey=%22DOG%22");
+        assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byType?startkey=%22DOG%22&startkey_docid=Pet%3A7&skip=1&descending=true&endkey=%22DOG%22");
 //    assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byType?startkey=%22DOG%22&startkey_docid=Pet:7&skip=1&descending=true&key=%22DOG%22")
 
         // Previous to Second page
@@ -338,7 +338,7 @@ public class PagingTest {
         assertTrue(pageNavigation.hasNextPage());
         assertTrue(pageNavigation.hasRequestedPage());
         assertEquals(pageNavigation.getRequestedPage(), "_design/pet/_view/byId?include_docs=true&limit=4");
-        assertEquals(pageNavigation.getNextPage(), "_design/pet/_view/byId?startkey=3&startkey_docid=Pet:3&skip=1&descending=false");
+        assertEquals(pageNavigation.getNextPage(), "_design/pet/_view/byId?startkey=3&startkey_docid=Pet%3A3&skip=1&descending=false");
 
         // Second page
         er = couchDatabase.get().entity(PetEntity.class, pageNavigation.queryNextPage()).execute();
@@ -352,9 +352,9 @@ public class PagingTest {
         assertTrue(pageNavigation.hasPreviousPage());
         assertTrue(pageNavigation.hasNextPage());
         assertTrue(pageNavigation.hasRequestedPage());
-        assertEquals(pageNavigation.getRequestedPage(), "_design/pet/_view/byId?startkey=3&startkey_docid=Pet:3&skip=1&descending=false");
-        assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byId?startkey=4&startkey_docid=Pet:4&skip=1&descending=true");
-        assertEquals(pageNavigation.getNextPage(), "_design/pet/_view/byId?startkey=6&startkey_docid=Pet:6&skip=1&descending=false");
+        assertEquals(pageNavigation.getRequestedPage(), "_design/pet/_view/byId?startkey=3&startkey_docid=Pet%3A3&skip=1&descending=false");
+        assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byId?startkey=4&startkey_docid=Pet%3A4&skip=1&descending=true");
+        assertEquals(pageNavigation.getNextPage(), "_design/pet/_view/byId?startkey=6&startkey_docid=Pet%3A6&skip=1&descending=false");
 
         // Third page
         er = couchDatabase.get().entity(PetEntity.class, pageNavigation.queryNextPage()).execute();
@@ -368,9 +368,9 @@ public class PagingTest {
         assertTrue(pageNavigation.hasPreviousPage());
         assertTrue(pageNavigation.hasNextPage());
         assertTrue(pageNavigation.hasRequestedPage());
-        assertEquals(pageNavigation.getRequestedPage(), "_design/pet/_view/byId?startkey=6&startkey_docid=Pet:6&skip=1&descending=false");
-        assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byId?startkey=7&startkey_docid=Pet:7&skip=1&descending=true");
-        assertEquals(pageNavigation.getNextPage(), "_design/pet/_view/byId?startkey=9&startkey_docid=Pet:9&skip=1&descending=false");
+        assertEquals(pageNavigation.getRequestedPage(), "_design/pet/_view/byId?startkey=6&startkey_docid=Pet%3A6&skip=1&descending=false");
+        assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byId?startkey=7&startkey_docid=Pet%3A7&skip=1&descending=true");
+        assertEquals(pageNavigation.getNextPage(), "_design/pet/_view/byId?startkey=9&startkey_docid=Pet%3A9&skip=1&descending=false");
 
         // Fourth page
 
@@ -383,8 +383,8 @@ public class PagingTest {
         assertTrue(pageNavigation.hasPreviousPage());
         assertFalse(pageNavigation.hasNextPage());
         assertTrue(pageNavigation.hasRequestedPage());
-        assertEquals(pageNavigation.getRequestedPage(), "_design/pet/_view/byId?startkey=9&startkey_docid=Pet:9&skip=1&descending=false");
-        assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byId?startkey=10&startkey_docid=Pet:10&skip=1&descending=true");
+        assertEquals(pageNavigation.getRequestedPage(), "_design/pet/_view/byId?startkey=9&startkey_docid=Pet%3A9&skip=1&descending=false");
+        assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byId?startkey=10&startkey_docid=Pet%3A10&skip=1&descending=true");
 
     }
 
@@ -405,8 +405,14 @@ public class PagingTest {
         assertTrue(pageNavigation.hasNextPage());
         assertTrue(pageNavigation.hasRequestedPage());
         assertEquals(pageNavigation.getRequestedPage(), "_design/pet/_view/byCreatedAt?include_docs=true&limit=4");
-        String nextPage = String.format("_design/pet/_view/byCreatedAt?startkey=%%22%s%%22&startkey_docid=Pet:3&skip=1&descending=false", foundPets.get(2).getCreatedAt().toString());
-        assertEquals(pageNavigation.getNextPage(), nextPage);
+
+        String actualNextPage = pageNavigation.getNextPage();
+        String expectedNextPage = "_design/pet/_view/byCreatedAt?startkey=%22";
+        String createdAt = foundPets.get(2).getCreatedAt().toString();
+        createdAt = createdAt.replace(":", "%3A");
+        expectedNextPage += createdAt;
+        expectedNextPage += "%22&startkey_docid=Pet%3A3&skip=1&descending=false";
+        assertEquals(actualNextPage, expectedNextPage);
 
         // Second page
         er = couchDatabase.get().entity(PetEntity.class, pageNavigation.queryNextPage()).execute();
@@ -420,11 +426,15 @@ public class PagingTest {
         assertTrue(pageNavigation.hasPreviousPage());
         assertTrue(pageNavigation.hasNextPage());
         assertTrue(pageNavigation.hasRequestedPage());
-        assertEquals(pageNavigation.getRequestedPage(), nextPage);
-        String previousPage = String.format("_design/pet/_view/byCreatedAt?startkey=%%22%s%%22&startkey_docid=Pet:4&skip=1&descending=true", foundPets.get(0).getCreatedAt().toString());
+        assertEquals(pageNavigation.getRequestedPage(), expectedNextPage);
+
+        createdAt = foundPets.get(0).getCreatedAt().toString().replace(":", "%3A");
+        String previousPage = String.format("_design/pet/_view/byCreatedAt?startkey=%%22%s%%22&startkey_docid=Pet%%3A4&skip=1&descending=true", createdAt);
         assertEquals(pageNavigation.getPreviousPage(), previousPage);
-        nextPage = String.format("_design/pet/_view/byCreatedAt?startkey=%%22%s%%22&startkey_docid=Pet:6&skip=1&descending=false", foundPets.get(2).getCreatedAt().toString());
-        assertEquals(pageNavigation.getNextPage(), nextPage);
+
+        createdAt = foundPets.get(2).getCreatedAt().toString().replace(":", "%3A");
+        expectedNextPage = String.format("_design/pet/_view/byCreatedAt?startkey=%%22%s%%22&startkey_docid=Pet%%3A6&skip=1&descending=false", createdAt);
+        assertEquals(pageNavigation.getNextPage(), expectedNextPage);
 
         // Third page
         er = couchDatabase.get().entity(PetEntity.class, pageNavigation.queryNextPage()).execute();
@@ -438,11 +448,15 @@ public class PagingTest {
         assertTrue(pageNavigation.hasPreviousPage());
         assertTrue(pageNavigation.hasNextPage());
         assertTrue(pageNavigation.hasRequestedPage());
-        assertEquals(pageNavigation.getRequestedPage(), nextPage);
-        previousPage = String.format("_design/pet/_view/byCreatedAt?startkey=%%22%s%%22&startkey_docid=Pet:7&skip=1&descending=true", foundPets.get(0).getCreatedAt().toString());
+        assertEquals(pageNavigation.getRequestedPage(), expectedNextPage);
+
+        createdAt = foundPets.get(0).getCreatedAt().toString().replace(":", "%3A");
+        previousPage = String.format("_design/pet/_view/byCreatedAt?startkey=%%22%s%%22&startkey_docid=Pet%%3A7&skip=1&descending=true", createdAt);
         assertEquals(pageNavigation.getPreviousPage(), previousPage);
-        nextPage = String.format("_design/pet/_view/byCreatedAt?startkey=%%22%s%%22&startkey_docid=Pet:9&skip=1&descending=false", foundPets.get(2).getCreatedAt().toString());
-        assertEquals(pageNavigation.getNextPage(), nextPage);
+
+        createdAt = foundPets.get(2).getCreatedAt().toString().replace(":", "%3A");
+        expectedNextPage = String.format("_design/pet/_view/byCreatedAt?startkey=%%22%s%%22&startkey_docid=Pet%%3A9&skip=1&descending=false", createdAt);
+        assertEquals(pageNavigation.getNextPage(), expectedNextPage);
 
         // Fourth page
         er = couchDatabase.get().entity(PetEntity.class, pageNavigation.queryNextPage()).execute();
@@ -454,7 +468,9 @@ public class PagingTest {
         assertTrue(pageNavigation.hasPreviousPage());
         assertFalse(pageNavigation.hasNextPage());
         assertTrue(pageNavigation.hasRequestedPage());
-        previousPage = String.format("_design/pet/_view/byCreatedAt?startkey=%%22%s%%22&startkey_docid=Pet:10&skip=1&descending=true", foundPets.get(0).getCreatedAt().toString());
+
+        createdAt = foundPets.get(0).getCreatedAt().toString().replace(":", "%3A");
+        previousPage = String.format("_design/pet/_view/byCreatedAt?startkey=%%22%s%%22&startkey_docid=Pet%%3A10&skip=1&descending=true", createdAt);
         assertEquals(pageNavigation.getPreviousPage(), previousPage);
 
     }
@@ -477,8 +493,8 @@ public class PagingTest {
         assertTrue(pageNavigation.hasPreviousPage());
         assertFalse(pageNavigation.hasNextPage());
         assertTrue(pageNavigation.hasRequestedPage());
-        assertEquals(pageNavigation.getRequestedPage(), "_design/pet/_view/byId?startkey=9&startkey_docid=Pet:9&skip=1&descending=false");
-        assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byId?startkey=10&startkey_docid=Pet:10&skip=1&descending=true");
+        assertEquals(pageNavigation.getRequestedPage(), "_design/pet/_view/byId?startkey=9&startkey_docid=Pet%3A9&skip=1&descending=false");
+        assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byId?startkey=10&startkey_docid=Pet%3A10&skip=1&descending=true");
 
         // Previous (page 3)
 
@@ -493,9 +509,9 @@ public class PagingTest {
         assertTrue(pageNavigation.hasPreviousPage());
         assertTrue(pageNavigation.hasNextPage());
         assertTrue(pageNavigation.hasRequestedPage());
-        assertEquals(pageNavigation.getRequestedPage(), "_design/pet/_view/byId?startkey=10&startkey_docid=Pet:10&skip=1&descending=true");
-        assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byId?startkey=7&startkey_docid=Pet:7&skip=1&descending=true");
-        assertEquals(pageNavigation.getNextPage(), "_design/pet/_view/byId?startkey=9&startkey_docid=Pet:9&skip=1&descending=false");
+        assertEquals(pageNavigation.getRequestedPage(), "_design/pet/_view/byId?startkey=10&startkey_docid=Pet%3A10&skip=1&descending=true");
+        assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byId?startkey=7&startkey_docid=Pet%3A7&skip=1&descending=true");
+        assertEquals(pageNavigation.getNextPage(), "_design/pet/_view/byId?startkey=9&startkey_docid=Pet%3A9&skip=1&descending=false");
 
         // Previous (page 2)
         er = couchDatabase.get().entity(PetEntity.class, pageNavigation.queryPreviousPage()).execute();
@@ -509,9 +525,9 @@ public class PagingTest {
         assertTrue(pageNavigation.hasPreviousPage());
         assertTrue(pageNavigation.hasNextPage());
         assertTrue(pageNavigation.hasRequestedPage());
-        assertEquals(pageNavigation.getRequestedPage(), "_design/pet/_view/byId?startkey=7&startkey_docid=Pet:7&skip=1&descending=true");
-        assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byId?startkey=4&startkey_docid=Pet:4&skip=1&descending=true");
-        assertEquals(pageNavigation.getNextPage(), "_design/pet/_view/byId?startkey=6&startkey_docid=Pet:6&skip=1&descending=false");
+        assertEquals(pageNavigation.getRequestedPage(), "_design/pet/_view/byId?startkey=7&startkey_docid=Pet%3A7&skip=1&descending=true");
+        assertEquals(pageNavigation.getPreviousPage(), "_design/pet/_view/byId?startkey=4&startkey_docid=Pet%3A4&skip=1&descending=true");
+        assertEquals(pageNavigation.getNextPage(), "_design/pet/_view/byId?startkey=6&startkey_docid=Pet%3A6&skip=1&descending=false");
 
         // Previous (page 1)
         er = couchDatabase.get().entity(PetEntity.class, pageNavigation.queryPreviousPage()).execute();
@@ -525,9 +541,9 @@ public class PagingTest {
         assertFalse(pageNavigation.hasPreviousPage());
         assertTrue(pageNavigation.hasNextPage());
         assertTrue(pageNavigation.hasRequestedPage());
-        assertEquals(pageNavigation.getRequestedPage(), "_design/pet/_view/byId?startkey=4&startkey_docid=Pet:4&skip=1&descending=true");
+        assertEquals(pageNavigation.getRequestedPage(), "_design/pet/_view/byId?startkey=4&startkey_docid=Pet%3A4&skip=1&descending=true");
         assertNull(pageNavigation.getPreviousPage());
-        assertEquals(pageNavigation.getNextPage(), "_design/pet/_view/byId?startkey=3&startkey_docid=Pet:3&skip=1&descending=false");
+        assertEquals(pageNavigation.getNextPage(), "_design/pet/_view/byId?startkey=3&startkey_docid=Pet%3A3&skip=1&descending=false");
     }
 
 }
