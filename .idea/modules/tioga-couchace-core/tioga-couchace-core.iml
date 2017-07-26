@@ -5,6 +5,7 @@
     <content url="file://$MODULE_DIR$/../../../tioga-couchace-core">
       <excludeFolder url="file://$MODULE_DIR$/../../../tioga-couchace-core/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../../tioga-couchace-core/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../tioga-couchace-core/out" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

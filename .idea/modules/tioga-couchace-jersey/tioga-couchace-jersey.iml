@@ -5,6 +5,7 @@
     <content url="file://$MODULE_DIR$/../../../tioga-couchace-jersey">
       <excludeFolder url="file://$MODULE_DIR$/../../../tioga-couchace-jersey/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../../tioga-couchace-jersey/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../tioga-couchace-jersey/out" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
