@@ -2,3 +2,8 @@
 build/
 .gradle/
 couchace-jp.iml
+tioga-couchace-all/out/
+tioga-couchace-annotations/out/
+tioga-couchace-core/out/
+tioga-couchace-jackson/out/
+tioga-couchace-jersey/out/
