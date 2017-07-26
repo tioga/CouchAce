@@ -23,16 +23,17 @@ import org.tiogasolutions.couchace.core.api.CouchSetup;
 import org.tiogasolutions.couchace.core.api.request.CouchFeature;
 import org.tiogasolutions.couchace.core.api.request.CouchFeatureSet;
 import org.tiogasolutions.couchace.core.api.response.WriteResponse;
-import org.tiogasolutions.couchace.core.internal.util.IOUtil;
 import org.tiogasolutions.couchace.jackson.JacksonCouchJsonStrategy;
 import org.tiogasolutions.couchace.jersey.JerseyCouchHttpClient;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.net.URI;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Properties;
 
 import static org.testng.Assert.assertTrue;
 
@@ -46,15 +47,36 @@ public class TestSetup {
     private static TestSetup singleton = null;
 
     public static final String databaseName = "test-couchace";
-    public static final String userName = "parr";
-    public static final String password = "go2Cloudant";
 
-    public static final String storePass = "ZWYyazhISHFt";
-
-    //  private static final String couchUrlSsl = "http://parr.cloudant.com:6984"
-    public static final String couchUrl = "http://parr.cloudant.com";
+    public static final String userName;
+    public static final String password;
+    public static final String couchUrl;
 
     private byte[] imageBytes;
+
+    static {
+        String tempUserName = null;
+        String tempPassword = null;
+        String tempCouchUrl = null;
+
+        try {
+            File dir = new File(System.getProperty("user.home"));
+            File file = new File(dir, "tioga-secret.properties");
+
+            Properties properties = new Properties();   // Create a new properties object
+            properties.putAll(System.getProperties());  // Fill it with the system properties
+            properties.load(new FileInputStream(file)); // Override it with the Tioga Secret Properties.
+
+            tempUserName = properties.getProperty("couch_ace_username");
+            tempPassword = properties.getProperty("couch_ace_password");
+            tempCouchUrl = properties.getProperty("couch_ace_url");
+
+        } catch (Exception ignored) {/* ignored */}
+
+        userName = (tempUserName == null) ? "test-user" : tempUserName;
+        password = (tempPassword == null) ? "test-user" : tempPassword;
+        couchUrl = (tempCouchUrl == null) ? "http://127.0.0.1:5984" : tempCouchUrl;
+    }
 
     public static boolean isCloudant() {
       return couchUrl.endsWith(".cloudant.com");
@@ -83,11 +105,15 @@ public class TestSetup {
                 .setPassword(password)
                 .setHttpClient(JerseyCouchHttpClient.class)
                 .setJsonStrategy(jsonStrategy);
-        if (couchUrl.startsWith("https")) {
-            File moduleDir = IOUtil.findDirNear(IOUtil.currentDir(), "couchace-all");
-            File keystoreFile = new File(moduleDir, "src/test/resources/couch-test.jks");
-            couchSetup.ssl(keystoreFile.getAbsolutePath(), storePass);
-        }
+
+//        if (couchUrl.startsWith("https")) {
+//            File moduleDir = IOUtil.findDirNear(IOUtil.currentDir(), "couchace-all");
+//            File keystoreFile = new File(moduleDir, "src/test/resources/couch-test.jks");
+//
+//            SslSetup sslSetup = new SslSetup();
+//            couchSetup.setSslSetup(sslSetup);
+//            couchSetup.ssl(keystoreFile.toURI().toASCIIString(), storePass);
+//        }
 
         CouchServer couchServer = new CouchServer(couchSetup);
 

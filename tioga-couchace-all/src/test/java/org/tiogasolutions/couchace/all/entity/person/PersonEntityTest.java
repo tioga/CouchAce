@@ -16,6 +16,10 @@
 
 package org.tiogasolutions.couchace.all.entity.person;
 
+import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import org.tiogasolutions.couchace.all.test.TestSetup;
 import org.tiogasolutions.couchace.core.api.CouchDatabase;
 import org.tiogasolutions.couchace.core.api.CouchServer;
@@ -25,15 +29,8 @@ import org.tiogasolutions.couchace.core.api.http.CouchMediaType;
 import org.tiogasolutions.couchace.core.api.injectable.SimpleCouchInjectables;
 import org.tiogasolutions.couchace.core.api.query.CouchViewQuery;
 import org.tiogasolutions.couchace.core.api.response.*;
-import org.tiogasolutions.couchace.core.internal.util.IOUtil;
 import org.tiogasolutions.couchace.jackson.JacksonCouchJsonStrategy;
 import org.tiogasolutions.couchace.jersey.JerseyCouchHttpClient;
-import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.io.File;
 
 import static org.testng.Assert.*;
 
@@ -77,11 +74,12 @@ public class PersonEntityTest {
                 .setPassword(TestSetup.password)
                 .setHttpClient(JerseyCouchHttpClient.class)
                 .setJsonStrategy(jsonStrategy);
-        if (couchUrl.startsWith("https")) {
-            File moduleDir = IOUtil.findDirNear(IOUtil.currentDir(), "couchace-all");
-            File keystoreFile = new File(moduleDir, "src/test/resources/couch-test.jks");
-            couchSetup.ssl(keystoreFile.getAbsolutePath(), TestSetup.storePass);
-        }
+
+//        if (couchUrl.startsWith("https")) {
+//            File moduleDir = IOUtil.findDirNear(IOUtil.currentDir(), "couchace-all");
+//            File keystoreFile = new File(moduleDir, "src/test/resources/couch-test.jks");
+//            couchSetup.ssl(keystoreFile.getAbsolutePath(), TestSetup.storePass);
+//        }
 
         CouchServer couchServer = new CouchServer(couchSetup);
         couchDatabase = couchServer.database(TestSetup.databaseName);

@@ -111,7 +111,11 @@ public class DatabaseAdminTest {
         assertEquals(response.getHttpStatus(), CouchHttpStatus.ACCEPTED, response.getErrorReason());
     }
 
+
     public void viewCleanupDatabaseTest() {
+        if (TestSetup.isCloudant()) {
+          throw new SkipException("Compaction is automatic on Cloudant");
+        }
         WriteResponse response = database.post().database("_view_cleanup").execute();
         assertEquals(response.getHttpStatus(), CouchHttpStatus.ACCEPTED);
     }
